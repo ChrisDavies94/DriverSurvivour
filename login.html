@@ -6,10 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
     <script src="login.js"></script>
+    <script>
+        // Client ID and API key from the Developer Console
+        var CLIENT_ID = 'YOUR_CLIENT_ID';
+        var API_KEY = 'YOUR_API_KEY';
+
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+        /**
+         *  On load, called to load the auth2 library and API client library.
+         */
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        /**
+         *  Initializes the API client library and sets up sign-in state
+         *  listeners.
+         */
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function () {
+                // Listen for sign-in state changes.
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                // Handle the initial sign-in state.
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            }, function (error) {
+                appendPre(JSON.stringify(error, null, 2));
+            });
+        }
+
+        /**
+         *  Called when the signed in status changes, to update the UI appropriately
+         */
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                // User is signed in, hide the sign-in button and show the form
+                var authorizeButton = document.getElementById('authorize-button');
+                authorizeButton.style.display = 'none';
+                var signUpForm = document.getElementById('sign-up-form');
+                signUpForm.style.display = 'block';
+            } else {
+                // User is not signed in, show the "Sign In" button
+                var authorizeButton = document.getElementById('authorize-button');
+                authorizeButton.style.display = 'block';
+                authorizeButton.onclick = handleAuthClick;
+            }
+        }
+
+        /**
+         *  Sign in the user upon button click.
+         */
+        function handleAuthClick(event) {
+            gapi.auth2.getAuthInstance().signIn();
+        }
+    </script>
 </head>
 <body>
 <h1>Login</h1>
+<div id="authorize-div">
+    <!--Button for the user to click to initiate auth sequence -->
+    <button id="authorize-button" style="display: none;">Authorize</button>
+</div>
 <form id="login-form">
     <label for="email">Email:</label><br>
     <input type="email" id="email" name="email"><br>
