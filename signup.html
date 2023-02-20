@@ -77,7 +77,7 @@
                 'timeMin': (new Date()).toISOString(),
                 'showDeleted': false,
                 'singleEvents': true,
-                'maxResults': 10,
+                'maxResults': 23,
                 'orderBy': 'startTime'
             }).then(function(response) {
                 var events = response.result.items;
@@ -108,45 +108,40 @@
                 <div class="card-header">
                     <h4 class="text-center">F1 League Sign Up</h4>
                 </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="time">Time</label>
-                        <input type="time" id="time" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="car-select">Car</label>
-                        <select id="car-select" class="form-control" required>
-                            <option value="">Select a car</option>
-                            <option value="Mercedes">Mercedes</option>
-                            <option value="Ferrari">Ferrari</option>
-                            <option value="Red Bull">Red Bull</option>
-                            <option value="McLaren">McLaren</option>
-                            <option value="Aston Martin">Aston Martin</option>
-                            <option value="Alpine">Alpine</option>
-                            <option value="AlphaTauri">AlphaTauri</option>
-                            <option value="Alfa Romeo">Alfa Romeo</option>
-                            <option value="Haas">Haas</option>
-                            <option value="Williams">Williams</option>
-                        </select>
-                    </div>
-                    <button id="submit-button" class="btn btn-primary btn-block">Submit</button>
-                </div>
+                <div>
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="password-confirm">Confirm Password:</label>
+    <input type="password" id="password-confirm" name="password-confirm" required>
+
+    <label for="team">Favorite Team:</label>
+    <select id="team" name="team">
+      <option value="mercedes">Mercedes</option>
+      <option value="redbull">Red Bull</option>
+      <option value="ferrari">Ferrari</option>
+      <option value="mclaren">McLaren</option>
+    </select>
+
+    <label for="driver">Favorite Driver:</label>
+    <select id="driver" name="driver">
+      <option value="hamilton">Lewis Hamilton</option>
+      <option value="verstappen">Max Verstappen</option>
+      <option value="leclerc">Charles Leclerc</option>
+      <option value="norris">Lando Norris</option>
+    </select>
+
+    <button type="submit">Sign Up</button>
+  </form>
+            </div>
+
             </div>
         </div>
     </div>
