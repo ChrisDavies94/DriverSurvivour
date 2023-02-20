@@ -5,22 +5,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="login.js"></script>
 </head>
 <body>
 <h1>Login</h1>
-<form>
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
+<form id="login-form">
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br>
+    <input type="submit" value="Login">
 </form>
-<script src="scripts/login.js"></script>
+<p id="login-message"></p>
 </body>
 </html>
